@@ -5,4 +5,4 @@
 * Kuitenkin tekstin teema on hyvä valita siten, että käyttäjät pystyvät antamaan siitä palautetta sekä käyttäjien antama palaute on tarpeellista/hyödyllistä sovelluksen ylläpitäjälle
 * Tesktin teemoja voisivat olla esim. historialliset tekstit päiväyksillä tai vaikka huonosti kirjoitetut reddit kommentit
 * Käyttäjien antamien arviointejen ja luokittelun perusteella voidaan muodostaa tilastollisia tunnuslukuja yksittäisestä datasta tai jopa koko datasetistä
-* Tunnusluvut voivat kuvata esim. datan laatua
+* Täten tunnusluvut voivat kuvata esim. datan laatua tai muuta haluttua kriteeriä.
