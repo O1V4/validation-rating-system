@@ -1,5 +1,7 @@
 # validation-rating-system
 
+Välipalautus 1 (Initial commit Sep 10, 2023, 8:18 PM GMT+3)
+
 ## Kyseessä on faktuaalisen tekstin validointi ja arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta ja oikeellisuudesta
 * Arvioitava teksti voi olla peräisen melkein mistä tahansa tekstipohjaisesta datasetistä (valitaan tarpeiden mukaan)
 * Kuitenkin tekstin teema on hyvä valita siten, että käyttäjät pystyvät antamaan siitä palautetta sekä käyttäjien antama palaute on tarpeellista/hyödyllistä sovelluksen ylläpitäjälle
