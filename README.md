@@ -1,4 +1,4 @@
-# validation rating system
+# validation-rating-system
 
 ## Kyseessä on faktuaalisen tekstin validointi ja arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta ja oikeellisuudesta
 * Arvioitava teksti voi olla peräisen melkein mistä tahansa tekstipohjaisesta datasetistä (valitaan tarpeiden mukaan)
