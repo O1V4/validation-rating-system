@@ -7,3 +7,7 @@
 * Käyttäjien antamien arviointejen ja luokittelun perusteella voidaan muodostaa tilastollisia tunnuslukuja yksittäisestä datasta tai jopa koko datasetistä
 * Täten datan tunnusluvut voivat kuvata esim. tekstin kieliopillista laatua, historiallisten päiväysten tarkkuutta tai muita haluttuja kriteeriä
 * Halutessaan ylläpitäjä/datasetin submittaaja voi itse valita millä kriteereillä haluaa, että käyttäjät arvioivat kyseistä dataa 
+
+### Välipalautus 2
+
+Sovelluksen nykyinen tilanne on ihan hyvä. Jonkin verran vielä hiomista ja joidenkin asioiden muuttelemista tulee tapahtumaan. Sovellusta voi testata itse git clonaamalla ja luomalla olennaiset postgres tietokannat.  
