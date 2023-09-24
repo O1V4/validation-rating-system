@@ -10,4 +10,4 @@
 
 ### Välipalautus 2
 
-Sovelluksen nykyinen tilanne on ihan hyvä. Jonkin verran vielä hiomista ja joidenkin asioiden muuttelemista tulee tapahtumaan. Sovellusta voi testata itse git clonaamalla ja luomalla olennaiset postgres tietokannat.  
+Sovelluksen nykyinen tilanne on ihan hyvä. Jonkin verran vielä hiomista ja joidenkin asioiden muuttelemista tulee tapahtumaan. Sovellusta voi testata itse git clonaamalla ja luomalla olennaiset postgres tablet.  
