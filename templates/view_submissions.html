@@ -1,0 +1,21 @@
+<ul>
+{% for submission in submissions %}
+<li>
+<p>{{ submission.text }}</p>
+<form method="post" action="{{ url_for('rate', submission_id=submission.id) }}">
+<select name="rating">
+{% for i in range(1, 11) %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+<input type="submit" value="Rate">
+</form>
+{% if submission.ratings %}
+<p>Average Rating: {{ (sum([rating.rating_value for rating in submission.ratings]) / len(submission.ratings))|round(2) }}</p>
+{% else %}
+<p>No ratings yet.</p>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+    
