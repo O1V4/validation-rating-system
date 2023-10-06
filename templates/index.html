@@ -1,36 +1,41 @@
-{% if session.username %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-<a href="/submit_text">Lähetä teksti</a>
-<h3>Tekstit:</h3>
-<ul>
-{% for submission in submissions %}
-<li>
-<p>{{ submission.text }}</p>
-<form method="post" action="{{ url_for('rate', submission_id=submission.id) }}">
-<select name="rating">
-{% for i in range(1, 11) %}
-<option value="{{ i }}">{{ i }}</option>
-{% endfor %}
-</select>
-<input type="submit" value="Arvostele">
-</form>
-{% if submission.average_rating %}
-<p>Keskimääräinen arvio: {{ submission.average_rating }}</p>
-{% else %}
-<p>Ei arvosteluja vielä.</p>
-{% endif %}
-</li>
-{% endfor %}
-</ul>
+<head>
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body>
+    {% if session.username %}
+    <p>Olet kirjautunut nimellä {{ session.username }}</p>
+    <a href="/logout">Kirjaudu ulos</a>
+    <a href="/submit_text">Lähetä teksti</a>
+    <h3>Tekstit:</h3>
+    <ul>
+    {% for submission in submissions %}
+    <li>
+    <p>{{ submission.text }}</p>
+    <form method="post" action="{{ url_for('rate', submission_id=submission.id) }}">
+    <select name="rating">
+    {% for i in range(1, 11) %}
+    <option value="{{ i }}">{{ i }}</option>
+    {% endfor %}
+    </select>
+    <input type="submit" value="Arvostele">
+    </form>
+    {% if submission.average_rating %}
+    <p>Keskimääräinen arvio: {{ submission.average_rating }}</p>
+    {% else %}
+    <p>Ei arvosteluja vielä.</p>
+    {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
 
-{% else %}
-<form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
-<a href="/newuser">Uusi käyttäjä</a><br>
-</form>
-{% endif %}
+    {% else %}
+    <form action="/login" method="POST">
+    <p>Tunnus:<br>
+    <input type="text" name="username"></p>
+    <p>Salasana:<br>
+    <input type="password" name="password"></p>
+    <input type="submit" value="Kirjaudu">
+    <a href="/newuser">Uusi käyttäjä</a><br>
+    </form>
+    {% endif %}
+</body>

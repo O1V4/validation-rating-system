@@ -1,9 +1,14 @@
-{{ topic }}
-<hr>
-<ul>
-{% for choice in choices %}
-<li> {{ choice.choice }}: {{ choice.count }} kpl
-{% endfor %}
-</ul>
-<hr>
-<a href="/">Takaisin</a>
+<head>
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body>
+    {{ topic }}
+    <hr>
+    <ul>
+    {% for choice in choices %}
+    <li> {{ choice.choice }}: {{ choice.count }} kpl
+    {% endfor %}
+    </ul>
+    <hr>
+    <a href="/">Takaisin</a>
+</body>
