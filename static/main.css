@@ -43,7 +43,7 @@ textarea {
 }
 
 input[type="submit"] {
-    background-color: #993366; /* Magenta shade */
+    background-color: #336633; /* changed to green */
     color: white;
     padding: 10px 20px; /* reduced padding */
     font-size: 1em; /* reduced font size */
@@ -54,5 +54,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #cc6699; /* Lighter magenta shade */
+    background-color: #669966; /* changed to light green */
 }
