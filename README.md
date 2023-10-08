@@ -47,9 +47,12 @@ Lopuksi siirry takaisin git kloonattuun repoon jos et siellä valmiiksi ollut, j
     flask run
 
 
-**Huom(1)!** Uuden salausavaimen voit luoda python3 tulkissa seuraavasti terminaalia käyttäen:
+**Huom(1)!** Uuden salausavaimen voit luoda python3 tulkissa seuraavasti terminaalia käyttäen.
+Avaa tulkki:
 
     python3
+
+Generoi salausavain:
 
     import secrets
     secrets.token_hex(16)
