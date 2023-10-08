@@ -50,6 +50,7 @@ Lopuksi siirry takaisin git kloonattuun repoon jos et siellä valmiiksi ollut, j
 **Huom(1)!** Uuden salausavaimen voit luoda python3 tulkissa seuraavasti terminaalia käyttäen:
 
     python3
+
     import secrets
     secrets.token_hex(16)
 
