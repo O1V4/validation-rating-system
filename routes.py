@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
-from .app import app
-from .db import db, User, Submission, Rating
+from app import app
+from db import db, User, Submission, Rating
 
 
 @app.route("/")
@@ -58,7 +58,7 @@ def login():
         return redirect("/")
     else:
         return redirect("/failed")
-    
+
 @app.route("/logout")
 def logout():
     del session["username"]
@@ -69,7 +69,7 @@ def logout():
 def submit_text():
     if "username" not in session:
         return redirect("/")
-    
+
     if request.method == "POST":
         text = request.form["text"]
         user_id = User.query.filter_by(username=session["username"]).first().id
@@ -77,17 +77,17 @@ def submit_text():
         db.session.add(new_submission)
         db.session.commit()
         return redirect("/")
-    
+
     return render_template("submit_text.html")
 
 @app.route("/rate/<int:submission_id>", methods=["POST"])
 def rate(submission_id):
     if "username" not in session:
         return redirect("/login")
-    
+
     rating = request.form["rating"]
     user_id = User.query.filter_by(username=session["username"]).first().id
-    
+
     existing_rating = Rating.query.filter_by(user_id=user_id, submission_id=submission_id).first()
     if existing_rating:
         existing_rating.rating_value = rating
