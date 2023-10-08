@@ -26,7 +26,7 @@ Käynnistä postgres tulkki:
     
     psql
 
-tai muulla tavallla ja 
+tai muulla tavalla ja 
 luo uusi tietokanta, jotta omat samannimiset taulut eivät menisi sekaisin (annetaan nimeksi valsystem):
 
     CREATE DATABASE "valsystem";
@@ -36,13 +36,13 @@ Poistu postgres tulkista ja palaa kloonattuun repoon. Aja seuraava komento uuden
     psql -d valsystem < schema.sql
 
 
-Luo git kloonattuun repoon uusi ".env"-niminen tiedosto, johon lisäät tietokannan osoitteen ja salausavaimen seuraavasti:
+Luo kloonattuun repoon uusi ".env"-niminen tiedosto, johon lisäät tietokannan osoitteen ja salausavaimen seuraavasti:
 
     touch .env
     echo "DATABASE_URL=postgresql:///valsystem" >> .env
     echo "SECRET_KEY=<sinun salausavain>" >> .env 
     
-Lopuksi siirry takaisin git kloonattuun repoon jos et siellä valmiiksi ollut, ja käynnistä flask sovellus komennolla:
+Lopuksi siirry takaisin git kloonattuun repoon jos et ollut siellä valmiiksi, ja käynnistä flask sovellus komennolla:
 
     flask run
 
@@ -65,8 +65,6 @@ Generoi salausavain:
 
     sudo -i -u postgres
     psql
-
-
 
 
 ### Kyseessä on faktuaalisen tekstin arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta
