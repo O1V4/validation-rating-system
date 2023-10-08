@@ -67,12 +67,12 @@ Generoi salausavain:
     psql
 
 
-### Kyseessä on faktuaalisen tekstin arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta
+#### Kyseessä on faktuaalisen tekstin arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta
 * Arvioitava teksti voi olla peräisen melkein mistä tahansa tekstipohjaisesta datasetistä (valitaan tarpeiden mukaan)
 * Kuitenkin tekstin teema on hyvä valita siten, että käyttäjät pystyvät arvoimaan sitä
 * Tesktin teemoja voisivat olla esim. historialliset tekstit päiväyksillä tai vaikka huonosti kirjoitetut reddit kommentit
 * Käyttäjien antamien arviointejen ja luokittelun perusteella voidaan muodostaa tilastollisia tunnuslukuja tekstistä
 
-#### Välipalautus 2
+#### Välipalautus
 
-Sovelluksen nykyinen tilanne on ihan hyvä. Jonkin verran vielä hiomista ja joidenkin asioiden muuttelemista tulee tapahtumaan. Sovellusta voi testata itse git clonaamalla ja luomalla olennaiset postgres tablet.  
+Sovelluksen nykyinen tilanne on ihan hyvä, mutta sovellus vaatii jonkin verran hiomista ja joidenkin asioiden muuttamista/lisäämistä. Sovelluksen ulkoasu on hyvässä jamassa, mutta jotakin funktionaalisuutta voisi vielä lisätä. Ylempänä on tarkat ohjeet sovelluksen testaamiseen.
