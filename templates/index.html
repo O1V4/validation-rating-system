@@ -3,9 +3,9 @@
 </head>
 <body>
     {% if session.username %}
-    <p>Olet kirjautunut nimellä {{ session.username }}</p>
+    <b><p>Olet kirjautunut käyttäjänimellä <ins>{{ session.username }}</ins></b></p>
+    <a href="/submit_text">Lähetä teksti</a><br>
     <a href="/logout">Kirjaudu ulos</a>
-    <a href="/submit_text">Lähetä teksti</a>
     <h3>Tekstit:</h3>
     <ul>
     {% for submission in submissions %}
