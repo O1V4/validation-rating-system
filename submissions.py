@@ -19,7 +19,8 @@ def fetch_ratings():
 
     try:
         sql = text("""SELECT submissions.id, submissions.text, ROUND(AVG(ratings.rating_value), 1) AS average_rating
-                FROM submissions LEFT JOIN ratings ON submissions.id = ratings.submission_id GROUP BY submissions.id, submissions.text ORDER BY submissions.id DESC;""")
+                   FROM submissions LEFT JOIN ratings ON submissions.id = ratings.submission_id
+                   GROUP BY submissions.id, submissions.text ORDER BY submissions.id DESC;""")
         submissions = db.session.execute(sql)
         submissions_fetch = submissions.fetchall()
         return submissions_fetch
