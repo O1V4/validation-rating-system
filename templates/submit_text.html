@@ -4,6 +4,14 @@
 <body>
     <form method="post">
     <textarea name="text" required placeholder="Kirjoita arvioitava tekstisi tähän"></textarea><br>
-    <input type="submit" value="Lähetä"> <a href="/">Tai palaa takaisin</a>
+    <input type="submit" value="Lähetä"> <a href="/" class="button">Palaa takaisin</a>
     </form>
+    <br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <li><b style='color:firebrick;'>{{ message }}</b></li>
+    {% endfor %}
+    {% endif %}
+    {% endwith %} 
 </body>

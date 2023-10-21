@@ -4,8 +4,9 @@
 <body>
     {% if session.username %}
     <b><p>Olet kirjautunut käyttäjänimellä <ins>{{ session.username }}</ins></b></p>
-    <a href="/submit_text">Lähetä teksti</a><br>
-    <a href="/logout">Kirjaudu ulos</a>
+    <a href="/submit_text" class="button">Lähetä teksti</a><br>
+    <br>
+    <a href="/logout" class="button">Kirjaudu ulos</a>
     <h3>Tekstit:</h3>
     <ul>
     {% for submission in submissions %}
@@ -17,7 +18,7 @@
     <option value="{{ i }}">{{ i }}</option>
     {% endfor %}
     </select>
-    <input type="submit" value="Arvostele">
+    <input type="submit" value="Arvostele faktuaalisuutta">
     </form>
     {% if submission.average_rating %}
     <p>Keskimääräinen arvio: {{ submission.average_rating }}</p>
@@ -30,12 +31,20 @@
 
     {% else %}
     <form action="/login" method="POST">
-    <p>Tunnus:<br>
+    <label for="username">Käyttäjänimi:</label>
     <input type="text" name="username"></p>
-    <p>Salasana:<br>
+    <label for="password">Salasana:</label>
     <input type="password" name="password"></p>
     <input type="submit" value="Kirjaudu">
-    <a href="/newuser">Uusi käyttäjä</a><br>
+    <a href="/register" class="button">Uusi käyttäjä</a><br>
     </form>
+    <br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <li><b style='color:firebrick;'>{{ message }}</b></li>
+    {% endfor %}
+    {% endif %}
+    {% endwith %} 
     {% endif %}
 </body>
