@@ -1,0 +1,23 @@
+<head>
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body> 
+    <b>Luo uusi käyttäjä tai palaa takaisin</b>
+    <form action="/register" method="post">
+    <label for="username">Käyttäjänimi:</label>
+    <input type="text" name="username" id="username" required><br>
+    <label for="password">Salasana:</label>
+    <input type="password" name="password1" id="password1" required><br> 
+    <label for="password">Salasana uudelleen:</label>
+    <input type="password" name="password2" id="password2" required><br> 
+    <input type="submit" value="Rekisteröidy"> <a href="/" class="button">Palaa takaisin</a>
+    </form> 
+    <br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <li><b style='color:firebrick;'>{{ message }}</b></li>
+    {% endfor %}
+    {% endif %}
+    {% endwith %} 
+</body>
