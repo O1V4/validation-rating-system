@@ -1,84 +1,109 @@
-from flask import redirect, render_template, request, session
-from werkzeug.security import check_password_hash, generate_password_hash
 from app import app
-from db import db, User, Submission, Rating
+from flask import redirect, render_template, request, session, flash
+from user import create_user, username_already_exists, login_db
+from submissions import new_submission, fetch_ratings, add_rating
 
 
 @app.route("/")
 def index():
-    submissions = Submission.query.all()
-
-    for submission in submissions:
-        if submission.ratings:
-            submission.average_rating = round(sum([rating.rating_value for rating in submission.ratings]) / len(submission.ratings), 2)
-        else:
-            submission.average_rating = None
-
+    
+    submissions = fetch_ratings()
     return render_template("index.html", submissions=submissions)
 
-@app.route('/newuser')
-def newuser():
-    return render_template('newuser.html')
 
-@app.route('/userexists')
-def userexists():
-    return render_template('userexists.html')
+@app.route('/register', methods=["GET", "POST"])
+def register():
+
+    if request.method == "GET":
+        return render_template("register.html")
+    
+    if request.method == "POST":
+        username = request.form['username']
+        password1 = request.form['password1']
+        password2 = request.form['password2']
+
+        if username_already_exists(username):
+            flash("Käyttäjänimi on jo olemassa, valitse toinen!")
+            return render_template("register.html")
+
+        if len(username) < 4 or len(username) > 20:
+            flash("Käyttäjänimen pitää olla pituudeltaan 4-20 merkkiä!")
+            return render_template("register.html")
+
+        if len(password1) < 8:
+            flash("Salasanan pitää olla vähintään 8 merkkiä pitkä!")
+            return render_template("register.html")
+        
+        if password1 != password2:
+            flash("Salasanat eivät täsmänneet!")
+            return render_template("register.html")
+        
+        try:
+            create_user(username, password1)
+            return redirect('/usersuccess')
+        except:
+            flash("Käyttäjän luonti ei onnistunut, yritä uudelleen!")
+            return render_template("register.html")
+
 
 @app.route('/usersuccess')
 def usersuccess():
+
     return render_template('usersuccess.html')
 
-@app.route('/register', methods=['POST'])
-def register():
-    username = request.form['username']
-    password = request.form['password']
-    user = User.query.filter_by(username=username).first()
 
-    if user:
-        return redirect('/userexists')
-    else:
-        hashed_password = generate_password_hash(password, method='sha256')
-        new_user = User(username=username, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect('/usersuccess')
-
-@app.route("/failed")
-def failed():
-    return render_template('failed.html')
-
-@app.route("/login",methods=["POST"])
+@app.route("/login",methods=["POST", "GET"])
 def login():
-    username = request.form["username"]
-    password = request.form["password"]
-    user = User.query.filter_by(username=username).first()
 
-    if user and check_password_hash(user.password, password):
-        session["username"] = username
-        return redirect("/")
-    else:
-        return redirect("/failed")
+    if request.method == "GET":
+        return render_template("index.html", submissions="HUOM")
+
+    if request.method == "POST": 
+        username = request.form["username"]
+        password = request.form["password"]
+
+        check_id = login_db(username, password)
+        if check_id:
+            session["userid"] = check_id
+            session["username"] = username
+            return redirect("/")
+        else:
+            flash("Käyttäjänimi tai salasana on väärin, yritä uudelleen!")
+            return render_template("index.html", submissions="HUOM")
+        
 
 @app.route("/logout")
 def logout():
+
+    del session["userid"]
     del session["username"]
     return redirect("/")
 
 
 @app.route("/submit_text", methods=["GET", "POST"])
 def submit_text():
+
     if "username" not in session:
         return redirect("/")
+    
+    if request.method == "GET":
+        return render_template("submit_text.html")
 
     if request.method == "POST":
-        text = request.form["text"]
-        user_id = User.query.filter_by(username=session["username"]).first().id
-        new_submission = Submission(user_id=user_id, text=text)
-        db.session.add(new_submission)
-        db.session.commit()
-        return redirect("/")
+        user_text = request.form["text"]
+        user_id = session["userid"]
 
-    return render_template("submit_text.html")
+        if len(user_text.strip()) < 2:
+            flash("Tekstin pitää olla ainakin 2 merkkiä pitkä!")
+            return render_template("submit_text.html")
+
+        operation = new_submission(user_id, user_text)
+        if operation:
+            return redirect("/")
+        else:
+            flash("Jokin meni pieleen, yritä uudelleen!")
+            return render_template("submit_text.html")
+        
 
 @app.route("/rate/<int:submission_id>", methods=["POST"])
 def rate(submission_id):
@@ -86,18 +111,8 @@ def rate(submission_id):
         return redirect("/login")
 
     rating = request.form["rating"]
-    user_id = User.query.filter_by(username=session["username"]).first().id
+    user_id = session["userid"]
 
-    existing_rating = Rating.query.filter_by(user_id=user_id, submission_id=submission_id).first()
-    if existing_rating:
-        existing_rating.rating_value = rating
-    else:
-        new_rating = Rating(user_id=user_id, submission_id=submission_id, rating_value=rating)
-        db.session.add(new_rating)
-    db.session.commit()
+    add_rating(user_id, submission_id, rating)
+
     return redirect("/")
-
-@app.route("/view_submissions")
-def view_submissions():
-    submissions = Submission.query.all()
-    return render_template("view_submissions.html", submissions=submissions)
