@@ -1,7 +1,7 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(200) UNIQUE NOT NULL,
-    password VARCHAR(230) NOT NULL
+    username VARCHAR(20) UNIQUE NOT NULL,
+    password VARCHAR(88) NOT NULL
 );
 
 CREATE TABLE submissions (
