@@ -1,4 +1,4 @@
-# validation-rating-system
+# validation-rating-system app in Finnish
 
 ## Kuinka testata paikallisesti
 
