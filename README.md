@@ -79,6 +79,6 @@ Generoi salausavain:
 * Tekstin teemoja voisivat olla esim. historialliset tekstit päiväyksillä tai vaikka huonosti kirjoitetut reddit kommentit
 * Käyttäjät pystyvät antamaan toisten käyttäjien teksteille arvosanoja ja arviointeja/palautetta sekä lisämään omia tekstejä
 * Käyttäjien antamien arvosanojen perusteella teksteistä muodostetaan tilastollisia tunnuslukuja
-* HUOM!: Arvosteluja tietylle tesktille täytyy olla vähintään kolmelta eri käyttäjältä, jotta pystyt huomaamaan keskimääräisen ja mediaani arvion välillä eron.
+* HUOM!: Arvosteluja tietylle tekstille täytyy olla vähintään kolmelta eri käyttäjältä, jotta pystyt huomaamaan keskimääräisen ja mediaani arvion välillä eron.
 * Ylempänä on tarkat ohjeet sovelluksen testaamiseen
 
