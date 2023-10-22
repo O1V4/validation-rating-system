@@ -12,6 +12,11 @@
     {% for submission in submissions %}
     <li>
     <p><b>{{ submission.text }}</b></p>
+    {% if submission.average_rating %}
+    <p>Keskimääräinen arvio: <b>{{ submission.average_rating }}</b> | Mediaani arvio: <b>{{ submission.median }}</b> | <a href="/readrevs/{{ submission.id }}">Saadut palautteet</a></p>
+    {% else %}
+    <p>Ei arvosteluja vielä | <a href="/readrevs/{{ submission.id }}">Saadut palautteet</a></p>
+    {% endif %}
     <form method="post" action="{{ url_for('rate', submission_id=submission.id) }}">
     Arvostele faktuaalisuutta: 
     <select name="rating">
@@ -34,12 +39,6 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    {% if submission.average_rating %}
-    <p>Keskimääräinen arvio: <b>{{ submission.average_rating }}</b> | Mediaani arvio: <b>{{ submission.median }}</b></p>
-    {% else %}
-    <p>Ei arvosteluja vielä.</p>
-    {% endif %}
-    <a href="/readrevs/{{ submission.id }}">Saadut palautteet</a>
     </li>
     {% endfor %}
     </ul>
