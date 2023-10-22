@@ -2,6 +2,7 @@ from app import app
 from flask import redirect, render_template, request, session, flash
 from user import create_user, username_already_exists, login_db
 from submissions import new_submission, fetch_ratings, add_rating, add_review, fetch_reviews, add_median
+from secrets import token_hex
 
 
 @app.route("/")
@@ -66,6 +67,7 @@ def login():
         if check_id:
             session["userid"] = check_id
             session["username"] = username
+            session["csrf_token"] = token_hex(16)
             return redirect("/")
         else:
             flash("Käyttäjänimi tai salasana on väärin, yritä uudelleen!")
@@ -77,6 +79,7 @@ def logout():
 
     del session["userid"]
     del session["username"]
+    del session["csrf_token"]
     return redirect("/")
 
 
