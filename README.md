@@ -70,6 +70,8 @@ Generoi salausavain:
 
 ### Lopullinen sovellus
 
+![Screenshot from 2023-10-22 21-10-47](https://github.com/oivaaa/validation-rating-system/assets/72695556/34e3705a-3d82-4a1d-b33e-8158acafb723)
+
 #### Kyseessä on anonyymi faktuaalisen tekstin arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta sekä lähettää uusia tekstejä
 
 * Arvioitava teksti voi olla peräisen melkein mistä tahansa tekstityypistä tai -lajista (valitaan tarpeiden mukaan)
