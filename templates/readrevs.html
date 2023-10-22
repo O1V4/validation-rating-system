@@ -1,0 +1,19 @@
+<head>
+    <link rel="stylesheet" rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body> 
+    <h3>TEKSTIN <i>"{{ reviews[0].text }}"</i> PALAUTTEET:</h3>
+    {% if reviews[0].review is not none %}
+    <ul>
+    {% for rev in reviews %}
+    <li>
+    <p><b>{{ rev.review }}</b></p>
+    </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p><b><mark>Ei ole yhtään palautetta vielä.</mark></b></p>
+    {% endif %}
+    <br>
+    <a href="/" class="button">Palaa takaisin</a>
+</body>
