@@ -1,23 +1,21 @@
-from app import app
+from secrets import token_hex
 from flask import redirect, render_template, request, session, flash
+from app import app
 from user import create_user, username_already_exists, login_db
 from submissions import new_submission, fetch_ratings, add_rating, add_review, fetch_reviews, add_median
-from secrets import token_hex
 
 
 @app.route("/")
 def index():
-    
     submissions = fetch_ratings()
     return render_template("index.html", submissions=submissions)
 
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-
     if request.method == "GET":
         return render_template("register.html")
-    
+
     if request.method == "POST":
         username = request.form['username']
         password1 = request.form['password1']
@@ -34,11 +32,11 @@ def register():
         if len(password1) < 8:
             flash("Salasanan pitää olla vähintään 8 merkkiä pitkä!")
             return render_template("register.html")
-        
+
         if password1 != password2:
             flash("Salasanat eivät täsmänneet!")
             return render_template("register.html")
-        
+
         try:
             create_user(username, password1)
             return redirect('/usersuccess')
@@ -49,17 +47,15 @@ def register():
 
 @app.route('/usersuccess')
 def usersuccess():
-
     return render_template('usersuccess.html')
 
 
 @app.route("/login",methods=["POST", "GET"])
 def login():
-
     if request.method == "GET":
         return redirect("/")
 
-    if request.method == "POST": 
+    if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
 
@@ -72,11 +68,10 @@ def login():
         else:
             flash("Käyttäjänimi tai salasana on väärin, yritä uudelleen!")
             return redirect("/")
-        
+
 
 @app.route("/logout")
 def logout():
-
     del session["userid"]
     del session["username"]
     del session["csrf_token"]
@@ -85,10 +80,9 @@ def logout():
 
 @app.route("/submit_text", methods=["GET", "POST"])
 def submit_text():
-
     if "username" not in session:
         return redirect("/")
-    
+
     if request.method == "GET":
         return render_template("submit_text.html")
 
@@ -106,11 +100,10 @@ def submit_text():
         else:
             flash("Jokin meni pieleen, yritä uudelleen!")
             return render_template("submit_text.html")
-        
+
 
 @app.route("/rate/<int:submission_id>", methods=["POST"])
 def rate(submission_id):
-
     if "username" not in session:
         return redirect("/login")
 
@@ -126,7 +119,6 @@ def rate(submission_id):
 
 @app.route("/review/<int:submission_id>", methods=["POST"])
 def review(submission_id):
-
     if "username" not in session:
         return redirect("/login")
 
@@ -135,7 +127,7 @@ def review(submission_id):
 
     if len(review.strip()) < 2:
         flash("Palautteen pitää olla ainakin 2 merkkiä pitkä!")
-        return redirect("/")         
+        return redirect("/")
 
     add_review(user_id, submission_id, review)
 
@@ -147,4 +139,3 @@ def readrevs(submission_id):
     reviews = fetch_reviews(submission_id)
     print(reviews)
     return render_template("readrevs.html", reviews=reviews)
-
