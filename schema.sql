@@ -23,3 +23,9 @@ CREATE TABLE reviews (
     submission_id INTEGER REFERENCES submissions(id) ON DELETE CASCADE,
     review TEXT NOT NULL
 );
+
+CREATE TABLE medians (
+    id SERIAL PRIMARY KEY,
+    submission_id INTEGER REFERENCES submissions(id) ON DELETE CASCADE,
+    median DECIMAL NOT NULL
+);
