@@ -1,7 +1,7 @@
 from app import app
 from flask import redirect, render_template, request, session, flash
 from user import create_user, username_already_exists, login_db
-from submissions import new_submission, fetch_ratings, add_rating
+from submissions import new_submission, fetch_ratings, add_rating, add_review, fetch_reviews
 
 
 @app.route("/")
@@ -56,7 +56,7 @@ def usersuccess():
 def login():
 
     if request.method == "GET":
-        return render_template("index.html", submissions="HUOM")
+        return redirect("/")
 
     if request.method == "POST": 
         username = request.form["username"]
@@ -69,7 +69,7 @@ def login():
             return redirect("/")
         else:
             flash("Käyttäjänimi tai salasana on väärin, yritä uudelleen!")
-            return render_template("index.html", submissions="HUOM")
+            return redirect("/")
         
 
 @app.route("/logout")
@@ -107,6 +107,7 @@ def submit_text():
 
 @app.route("/rate/<int:submission_id>", methods=["POST"])
 def rate(submission_id):
+
     if "username" not in session:
         return redirect("/login")
 
@@ -116,3 +117,29 @@ def rate(submission_id):
     add_rating(user_id, submission_id, rating)
 
     return redirect("/")
+
+
+@app.route("/review/<int:submission_id>", methods=["POST"])
+def review(submission_id):
+
+    if "username" not in session:
+        return redirect("/login")
+
+    review = request.form["review"]
+    user_id = session["userid"]
+
+    if len(review.strip()) < 2:
+        flash("Arvion pitää olla ainakin 2 merkkiä pitkä!")
+        return redirect("/")         
+
+    add_review(user_id, submission_id, review)
+
+    return redirect("/")
+
+
+@app.route("/readrevs/<int:submission_id>", methods=["GET"])
+def readrevs(submission_id):
+    reviews = fetch_reviews(submission_id)
+    print(reviews)
+    return render_template("readrevs.html", reviews=reviews)
+
