@@ -7,28 +7,42 @@
     <a href="/submit_text" class="button">Lähetä teksti</a><br>
     <br>
     <a href="/logout" class="button">Kirjaudu ulos</a>
-    <h3>Tekstit:</h3>
+    <h2>Tekstit:</h2>
     <ul>
     {% for submission in submissions %}
     <li>
-    <p>{{ submission.text }}</p>
+    <p><b>{{ submission.text }}</b></p>
     <form method="post" action="{{ url_for('rate', submission_id=submission.id) }}">
+    Arvostele faktuaalisuutta: 
     <select name="rating">
     {% for i in range(1, 11) %}
     <option value="{{ i }}">{{ i }}</option>
     {% endfor %}
     </select>
-    <input type="submit" value="Arvostele faktuaalisuutta">
+    <br>
+    <input type="submit" value="Lähetä arvosana">
     </form>
+    <form method="post" action="{{ url_for('review', submission_id=submission.id) }}">
+    Kirjoita sanallinen palaute: <input type="text" name="review" id="review" required>
+    <br>
+    <input type="submit" value="Lähetä palaute">
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <li><b style='color:firebrick;'>{{ message }}</b></li>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     {% if submission.average_rating %}
-    <p>Keskimääräinen arvio: {{ submission.average_rating }}</p>
+    <p>Keskimääräinen arvio: <b>{{ submission.average_rating }}</b></p>
     {% else %}
     <p>Ei arvosteluja vielä.</p>
     {% endif %}
+    <a href="/readrevs/{{ submission.id }}">Palautteet</a>
     </li>
     {% endfor %}
     </ul>
-
     {% else %}
     <form action="/login" method="POST">
     <label for="username">Käyttäjänimi:</label>
