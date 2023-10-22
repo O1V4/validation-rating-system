@@ -1,6 +1,6 @@
 # validation-rating-system app in Finnish
 
-## Kuinka testata paikallisesti
+## Kuinka testata paikallisesti (tarvitset Postgres tietokannan)
 
 Git kloonaa repo tietokoneellesi esim seuraavalla komennolla:
 
