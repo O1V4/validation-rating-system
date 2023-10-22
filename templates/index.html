@@ -30,7 +30,8 @@
     <form method="post" action="{{ url_for('review', submission_id=submission.id) }}">
     Kirjoita sanallinen palaute: <input type="text" name="review" id="review" required>
     <br>
-    <input type="submit" value="Lähetä palaute">
+    <input type="submit" value="Lähetä palaute"><br>
+    <br>
     </form>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
