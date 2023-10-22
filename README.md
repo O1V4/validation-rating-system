@@ -69,6 +69,7 @@ Generoi salausavain:
 
 
 ### Lopullinen sovellus
+
 #### Kyseessä on anonyymi faktuaalisen tekstin arviointi sovellus, jossa käyttäjät voivat arvioida ja antaa palautetta tekstin laadusta sekä lähettää uusia tekstejä
 
 * Arvioitava teksti voi olla peräisen melkein mistä tahansa tekstityypistä tai -lajista (valitaan tarpeiden mukaan)
@@ -76,4 +77,6 @@ Generoi salausavain:
 * Tekstin teemoja voisivat olla esim. historialliset tekstit päiväyksillä tai vaikka huonosti kirjoitetut reddit kommentit
 * Käyttäjät pystyvät antamaan toisten käyttäjien teksteille arvosanoja ja arviointeja/palautetta sekä lisämään omia tekstejä
 * Käyttäjien antamien arvosanojen perusteella teksteistä muodostetaan tilastollisia tunnuslukuja
+* HUOM!: Arvosteluja tietylle tesktille täytyy olla vähintään kolmelta eri käyttäjältä, jotta pystyt huomaamaan keskimääräisen ja mediaani arvion välillä eron.
 * Ylempänä on tarkat ohjeet sovelluksen testaamiseen
+
