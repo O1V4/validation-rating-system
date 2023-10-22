@@ -54,3 +54,33 @@ def add_rating(user_id, submission_id, rating_value):
         db.session.commit()
     except:
         pass
+
+
+def existing_review(user_id, submission_id):
+
+    sql = text("SELECT review FROM reviews WHERE user_id=:user_id AND submission_id=:submission_id")
+    rating = db.session.execute(sql, {"user_id":user_id, "submission_id":submission_id})
+    rating_fetch = rating.fetchone()
+    return rating_fetch
+
+
+def add_review(user_id, submission_id, review):
+
+    if existing_review(user_id,submission_id):
+        sql = text("DELETE FROM reviews WHERE user_id=:user_id AND submission_id=:submission_id")
+        db.session.execute(sql, {"user_id":user_id, "submission_id":submission_id})
+        db.session.commit()
+
+    sql = text("INSERT INTO reviews (user_id, submission_id, review) VALUES (:user_id, :submission_id, :review)")
+    db.session.execute(sql, {"user_id":user_id, "submission_id":submission_id, "review":review})
+    db.session.commit()
+
+
+def fetch_reviews(submission_id):
+        
+        sql = text("""SELECT submissions.id, submissions.text, reviews.review
+                   FROM submissions LEFT JOIN reviews ON submissions.id = reviews.submission_id
+                   WHERE submissions.id=:submission_id""")
+        review = db.session.execute(sql, {"submission_id":submission_id})
+        review_fetch = review.fetchall()
+        return review_fetch
