@@ -101,8 +101,6 @@ def add_median(submission_id):
     ratings = db.session.execute(sql, {"submission_id":submission_id})
     ratings_fetch = ratings.fetchall()
 
-    print(ratings_fetch)
-
     ratings_list = [x[0] for x in ratings_fetch] 
     n = len(ratings_list) 
     ratings_list.sort() 
@@ -114,7 +112,7 @@ def add_median(submission_id):
         median = ratings_list[n//2] 
     
     median = round(float(median),1)
-
+    
     if median_exists(submission_id):
         sql = text("DELETE FROM medians WHERE submission_id=:submission_id")
         db.session.execute(sql, {"submission_id":submission_id})
