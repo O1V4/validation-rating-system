@@ -35,11 +35,11 @@
     {% endif %}
     {% endwith %}
     {% if submission.average_rating %}
-    <p>Keskimääräinen arvio: <b>{{ submission.average_rating }}</b></p>
+    <p>Keskimääräinen arvio: <b>{{ submission.average_rating }}</b> | Mediaani arvio: <b>{{ submission.median }}</b></p>
     {% else %}
     <p>Ei arvosteluja vielä.</p>
     {% endif %}
-    <a href="/readrevs/{{ submission.id }}">Palautteet</a>
+    <a href="/readrevs/{{ submission.id }}">Saadut palautteet</a>
     </li>
     {% endfor %}
     </ul>
