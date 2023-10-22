@@ -1,7 +1,7 @@
 from app import app
 from flask import redirect, render_template, request, session, flash
 from user import create_user, username_already_exists, login_db
-from submissions import new_submission, fetch_ratings, add_rating, add_review, fetch_reviews
+from submissions import new_submission, fetch_ratings, add_rating, add_review, fetch_reviews, add_median
 
 
 @app.route("/")
@@ -115,6 +115,8 @@ def rate(submission_id):
     user_id = session["userid"]
 
     add_rating(user_id, submission_id, rating)
+
+    add_median(submission_id)
 
     return redirect("/")
 
