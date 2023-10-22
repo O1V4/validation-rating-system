@@ -16,3 +16,10 @@ CREATE TABLE ratings (
     submission_id INTEGER REFERENCES submissions(id) ON DELETE CASCADE,
     rating_value INTEGER NOT NULL CHECK (rating_value >= 1 AND rating_value <= 10)
 );
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    submission_id INTEGER REFERENCES submissions(id) ON DELETE CASCADE,
+    review TEXT NOT NULL
+);
