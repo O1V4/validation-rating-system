@@ -131,7 +131,7 @@ def review(submission_id):
     user_id = session["userid"]
 
     if len(review.strip()) < 2:
-        flash("Arvion pitää olla ainakin 2 merkkiä pitkä!")
+        flash("Palautteen pitää olla ainakin 2 merkkiä pitkä!")
         return redirect("/")         
 
     add_review(user_id, submission_id, review)
